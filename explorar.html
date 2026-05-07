@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar - Entre Copas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Entre Copas</a></div>
+        <nav class="nav-links">
+            <a href="explorar.html">Explorar</a>
+            <a href="panel.html">Panel</a>
+            <a href="reservas.html">Reservas</a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container">
+            <div class="page-header">
+                <h1>Colección de Bodegas</h1>
+                <p>Descubra nuestro catálogo curado de fincas y bodegas exclusivas.</p>
+            </div>
+
+            <div class="filters-container">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="valle">Valle Central</button>
+                    <button class="filter-btn" data-filter="montana">Montaña</button>
+                    <button class="filter-btn" data-filter="costa">Costa</button>
+                </div>
+            </div>
+
+            <div class="winery-grid" id="explore-grid">
+                <!-- Bodegas will be populated by JS -->
+                <article class="winery-card filter-item" data-category="valle">
+                    <img src="assets/winery.png" alt="Bodegas de Alva" class="winery-image" onerror="this.style.backgroundColor='var(--surface-dim)'">
+                    <div class="winery-info">
+                        <span class="label-caps">Valle Central</span>
+                        <h3>Bodegas de Alva</h3>
+                        <p>Una fusión de arquitectura de vanguardia y tradición centenaria en el corazón del valle.</p>
+                        <a href="reservas.html?bodega=alva" class="btn btn-ghost mt-sm">Reservar</a>
+                    </div>
+                </article>
+                <article class="winery-card filter-item" data-category="montana">
+                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <div class="winery-info">
+                        <span class="label-caps">Montaña</span>
+                        <h3>The Reserve</h3>
+                        <p>Exclusividad y catas privadas en un entorno natural inigualable con vistas a la cordillera.</p>
+                        <a href="reservas.html?bodega=reserve" class="btn btn-ghost mt-sm">Reservar</a>
+                    </div>
+                </article>
+                <article class="winery-card filter-item" data-category="valle">
+                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <div class="winery-info">
+                        <span class="label-caps">Valle Central</span>
+                        <h3>Villa Marini</h3>
+                        <p>Herencia y pasión en cada botella, con vistas panorámicas a los viñedos históricos.</p>
+                        <a href="reservas.html?bodega=marini" class="btn btn-ghost mt-sm">Reservar</a>
+                    </div>
+                </article>
+                <article class="winery-card filter-item" data-category="costa">
+                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <div class="winery-info">
+                        <span class="label-caps">Costa</span>
+                        <h3>Brisas del Mar</h3>
+                        <p>Vinos frescos con influencia oceánica, degustación al atardecer frente al mar.</p>
+                        <a href="reservas.html?bodega=brisas" class="btn btn-ghost mt-sm">Reservar</a>
+                    </div>
+                </article>
+                <article class="winery-card filter-item" data-category="montana">
+                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <div class="winery-info">
+                        <span class="label-caps">Montaña</span>
+                        <h3>Altos de Piedra</h3>
+                        <p>Viñedos de altura que producen vinos de carácter intenso y mineralidad única.</p>
+                        <a href="reservas.html?bodega=altos" class="btn btn-ghost mt-sm">Reservar</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2024 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario - Entre Copas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Entre Copas</a></div>
+        <nav class="nav-links">
+            <a href="explorar.html">Explorar</a>
+            <a href="panel.html">Panel</a>
+            <a href="reservas.html">Reservas</a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container">
+            <div class="dashboard-header">
+                <div class="user-profile">
+                    <div class="avatar">JM</div>
+                    <div class="user-info">
+                        <h2>Bienvenido, Julien</h2>
+                        <p>Miembro Connoisseur</p>
+                    </div>
+                </div>
+                <a href="reservas.html" class="btn btn-primary">Nueva Reserva</a>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-sidebar">
+                    <nav class="dashboard-nav">
+                        <a href="#" class="active">Mis Reservas</a>
+                        <a href="#">Historial de Catas</a>
+                        <a href="#">Bodegas Favoritas</a>
+                        <a href="#">Mi Perfil</a>
+                    </nav>
+                </div>
+
+                <div class="dashboard-content">
+                    <h3>Próximas Experiencias</h3>
+                    <div id="reservations-list" class="reservations-container">
+                        <!-- JS will populate this from localStorage -->
+                        <div class="empty-state">
+                            <p>No tienes reservas próximas.</p>
+                            <a href="explorar.html" class="btn btn-ghost mt-sm">Explorar Bodegas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2024 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
