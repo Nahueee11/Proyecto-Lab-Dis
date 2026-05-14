@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - Entre Copas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo">
+            <a href="index.html" class="brand-link">
+                <img src="assets/logo2.0.png" alt="Logo" class="brand-logo">
+                Entre Copas
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="explorar.html">Explorar</a>
+            <a href="panel.html">Panel</a>
+            <a href="reservas.html">Reservas</a>
+            <a href="registro.html" class="nav-icon-link" aria-label="Registrarse">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container" style="display: flex; justify-content: center;">
+            <div class="reservation-form-container" style="max-width: 500px; width: 100%;">
+                <div style="text-align: center; margin-bottom: var(--space-lg);">
+                    <h1>Únete a la Experiencia</h1>
+                    <p style="margin-top: var(--space-sm); color: var(--on-surface-variant);">Crea tu cuenta para acceder a reservas exclusivas y eventos privados.</p>
+                </div>
+                <form id="registro-form" class="form-wrapper">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required class="form-control" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" id="apellido" name="apellido" required class="form-control" placeholder="Tu apellido">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email_reg">Correo Electrónico</label>
+                        <input type="email" id="email_reg" name="email" required class="form-control" placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required class="form-control" placeholder="Mínimo 8 caracteres">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-md">Crear Cuenta</button>
+                    
+                    <div style="text-align: center; margin-top: var(--space-md); font-size: 14px;">
+                        ¿Ya tienes una cuenta? <a href="#" style="font-weight: 700; color: var(--primary); text-decoration: underline;">Iniciar Sesión</a>
+                    </div>
+                    
+                    <div id="registro-message" class="form-message hidden">
+                        <!-- JS will inject success message here -->
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2024 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
