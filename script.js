@@ -89,38 +89,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Reservas Page Logic: Form Handling ---
     const reservationForm = document.getElementById('reservation-form');
+    const API_BASE_URL = 'http://localhost:8080/api'; // Centralized API URL
+
+    // Helper function to display form messages
+    function showFormMessage(message, type) {
+        const msgEl = document.getElementById('form-message');
+        msgEl.textContent = message;
+        msgEl.className = `form-message ${type}`; // 'success' or 'error'
+        msgEl.classList.remove('hidden');
+    }
+
     if (reservationForm) {
-        reservationForm.addEventListener('submit', (e) => {
+        reservationForm.addEventListener('submit', enviarReserva);
+
+        async function enviarReserva(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(reservationForm);
-            const resData = {
-                id: Date.now().toString(36),
+
+            // Build payload matching backend field names
+            const payload = {
+                nombre: formData.get('nombre'),
+                email: formData.get('email'),
                 bodega: formData.get('bodega'),
                 fecha: formData.get('fecha'),
                 hora: formData.get('hora'),
-                invitados: formData.get('invitados'),
-                status: 'Confirmada'
+                invitados: parseInt(formData.get('invitados'), 10)
             };
 
-            // Save to localStorage
-            let reservations = JSON.parse(localStorage.getItem('entreCopasReservations') || '[]');
-            reservations.push(resData);
-            localStorage.setItem('entreCopasReservations', JSON.stringify(reservations));
+            try {
+                const resp = await fetch(`${API_BASE_URL}/reservas`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
 
-            // Show success message
-            const msgEl = document.getElementById('form-message');
-            msgEl.textContent = '¡Su reserva ha sido confirmada con éxito!';
-            msgEl.className = 'form-message success';
-            msgEl.classList.remove('hidden');
+                // Try to parse JSON response (if any)
+                let respBody = null;
+                try { respBody = await resp.json(); } catch (err) { /* no JSON body */ }
 
-            reservationForm.reset();
-            
-            // Redirect to panel after 2 seconds
-            setTimeout(() => {
-                window.location.href = 'panel.html';
-            }, 2000);
-        });
+                if (resp.ok) {
+                    console.log('Reserva enviada correctamente:', respBody || resp.status);
+
+                    // Optionally keep a local copy for the panel view
+                    const localRes = {
+                        id: respBody && respBody.id ? respBody.id : Date.now().toString(36),
+                        nombre: payload.nombre,
+                        email: payload.email,
+                        bodega: payload.bodega,
+                        fecha: payload.fecha,
+                        hora: payload.hora,
+                        invitados: payload.invitados,
+                        status: (respBody && respBody.status) ? respBody.status : 'Pendiente'
+                    };
+
+                    let reservations = JSON.parse(localStorage.getItem('entreCopasReservations') || '[]');
+                    reservations.push(localRes);
+                    localStorage.setItem('entreCopasReservations', JSON.stringify(reservations));
+
+                    showFormMessage('¡Solicitud enviada! Le confirmaremos por correo.', 'success');
+
+                    reservationForm.reset();
+
+                    setTimeout(() => { window.location.href = 'panel.html'; }, 2000);
+                } else {
+                    // Server returned validation errors or other failure
+                    console.error('Error del servidor al crear la reserva:', resp.status, respBody);
+                    const errorMessage = (respBody && respBody.message) ? respBody.message : 'Error al enviar la reserva. Intente de nuevo.';
+                    showFormMessage(errorMessage, 'error');
+                }
+            } catch (networkErr) {
+                console.error('Error de red al enviar la reserva:', networkErr);
+                showFormMessage('No se pudo conectar con el servidor. Revise su conexión e intente más tarde.', 'error');
+            }
+        }
     }
 
     // --- Panel Page Logic: Render Reservations ---
