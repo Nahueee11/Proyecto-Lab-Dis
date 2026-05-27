@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entre Copas - Winery Reservations</title>
-    <meta name="description" content="Descubra experiencias exclusivas en bodegas seleccionadas para el paladar más exigente.">
+    <meta name="description"
+        content="Descubra experiencias exclusivas en bodegas seleccionadas para el paladar más exigente.">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header id="main-header">
-        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">Entre Copas</a></div>
+        <div class="logo">
+            <a href="index.html" class="brand-link">
+                <img src="assets/logo2.0.png" alt="Logo" class="brand-logo">
+                Entre Copas
+            </a>
+        </div>
         <nav class="nav-links">
             <a href="explorar.html">Explorar</a>
             <a href="panel.html">Panel</a>
             <a href="reservas.html">Reservas</a>
+            <a href="registro.html" class="nav-icon-link" aria-label="Registrarse">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
         </nav>
     </header>
 
@@ -21,8 +36,9 @@
         <section class="hero">
             <img src="assets/hero.png" alt="Luxurious vineyard at golden hour" class="hero-bg">
             <div class="hero-content">
-                <h1>La Arquitectura de la<br>Viticultura y la Ceremonia</h1>
-                <p>Descubra experiencias exclusivas en bodegas seleccionadas para el paladar más exigente. Desde fincas históricas hasta maravillas arquitectónicas modernas.</p>
+                <h1>La Arquitectura De La<br>Viticultura y La Ceremonia</h1>
+                <p>Descubra experiencias exclusivas en bodegas seleccionadas para el paladar más exigente. Desde fincas
+                    históricas hasta maravillas arquitectónicas modernas.</p>
                 <div style="margin-top: 32px;">
                     <a href="explorar.html" class="btn btn-primary">Comenzar</a>
                 </div>
@@ -32,9 +48,9 @@
         <section class="section container">
             <div class="featured-header">
                 <h2>Bodegas Destacadas</h2>
-                <a href="explorar.html" class="link-all">Ver Todas las Colecciones</a>
+                <a href="explorar.html" class="link-all">Descubri mas bodegas</a>
             </div>
-            
+
             <div class="winery-grid">
                 <article class="winery-card">
                     <img src="assets/winery.png" alt="Bodegas de Alva architecture" class="winery-image">
@@ -44,14 +60,14 @@
                     </div>
                 </article>
                 <article class="winery-card">
-                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <img src="assets/reserve.png" alt="The Reserve" class="winery-image">
                     <div class="winery-info">
                         <h3>The Reserve</h3>
                         <p>Exclusividad y catas privadas en un entorno natural inigualable.</p>
                     </div>
                 </article>
                 <article class="winery-card">
-                    <div class="winery-image" style="background-color: var(--surface-dim);"></div>
+                    <img src="assets/marini.png" alt="Villa Marini" class="winery-image">
                     <div class="winery-info">
                         <h3>Villa Marini</h3>
                         <p>Herencia y pasión en cada botella, con vistas panorámicas a los viñedos.</p>
@@ -77,19 +93,21 @@
                                 <span class="feature-number">02.</span>
                                 <div class="feature-content">
                                     <h4>Reservas Sin Complicaciones</h4>
-                                    <p>Reserve catas privadas, recorridos por viñedos y estancias nocturnas al instante.</p>
+                                    <p>Reserve catas privadas, recorridos por viñedos y estancias nocturnas al instante.
+                                    </p>
                                 </div>
                             </li>
                             <li class="feature-item">
                                 <span class="feature-number">03.</span>
                                 <div class="feature-content">
                                     <h4>Acceso Exclusivo</h4>
-                                    <p>Desbloquee asignaciones directas de bodega e invitaciones a eventos exclusivos para miembros.</p>
+                                    <p>Desbloquee asignaciones directas de bodega e invitaciones a eventos exclusivos
+                                        para miembros.</p>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="concierge-col">
                         <h3>Para el Productor</h3>
                         <ul class="feature-list">
@@ -111,7 +129,8 @@
                                 <span class="feature-number">03.</span>
                                 <div class="feature-content">
                                     <h4>Analítica y Crecimiento</h4>
-                                    <p>Acceda a datos valiosos para refinar la experiencia de sus visitantes y las ventas de vino.</p>
+                                    <p>Acceda a datos valiosos para refinar la experiencia de sus visitantes y las
+                                        ventas de vino.</p>
                                 </div>
                             </li>
                         </ul>
@@ -122,7 +141,8 @@
 
         <section class="section">
             <div class="testimonial">
-                <blockquote>"Entre Copas ha transformado la forma en que descubrimos el alma de una región. Ya no es solo una cata; es una conexión profunda con la tierra."</blockquote>
+                <blockquote>"Entre Copas ha transformado la forma en que descubrimos el alma de una región. Ya no es
+                    solo una cata; es una conexión profunda con la tierra."</blockquote>
                 <cite>— Julien Moreau, Sommelier</cite>
             </div>
         </section>
@@ -132,17 +152,18 @@
         <div class="container footer-content">
             <div class="footer-logo">ENTRE COPAS</div>
             <div class="footer-links">
-                <a href="#">Herencia</a>
+                <a href="#">Preguntas Frecuentes</a>
                 <a href="#">Privacidad</a>
                 <a href="#">Términos</a>
-                <a href="#">Conserje</a>
+                <a href="#">Sobre Nosotros</a>
             </div>
             <div class="copyright">
-                © 2024 ENTRE COPAS. Viticultura y Ceremonia.
+                © 2026 ENTRE COPAS. Viticultura y Ceremonia.
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
