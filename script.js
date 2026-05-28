@@ -1,14 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('main-header');
+    // --- Hero Carousel Logic ---
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
 
-    // Handle header transparency on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            // Remove active classes from current slide
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+
+            // Update index with wrap-around
+            currentSlide = (index + slides.length) % slides.length;
+
+            // Add active classes to new current slide
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
         }
-    });
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function startAutoPlay() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(slideInterval);
+            startAutoPlay();
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlay();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlay();
+            });
+        }
+
+        indicators.forEach((indicator, idx) => {
+            indicator.addEventListener('click', () => {
+                showSlide(idx);
+                resetAutoPlay();
+            });
+        });
+
+        // Initialize autoplay
+        startAutoPlay();
+    }
 
     // Simple fade-in animation for elements on scroll
     const observerOptions = {
@@ -218,5 +272,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = 'panel.html';
             }, 2000);
         });
+    }
+
+    // --- Trabaja con Nosotros Page Logic ---
+    const partnerForm = document.getElementById('partner-form');
+    if (partnerForm) {
+        partnerForm.addEventListener('submit', enviarPropuestaBodega);
+
+        async function enviarPropuestaBodega(e) {
+            e.preventDefault();
+
+            const formData = new FormData(partnerForm);
+            const payload = {
+                nombreBodega: formData.get('nombreBodega'),
+                nombreContacto: formData.get('nombreContacto'),
+                email: formData.get('email'),
+                telefono: formData.get('telefono'),
+                region: formData.get('region'),
+                mensaje: formData.get('mensaje')
+            };
+
+            const msgEl = document.getElementById('partner-form-message');
+
+            function showPartnerMessage(message, type) {
+                msgEl.textContent = message;
+                msgEl.className = `form-message ${type}`; // 'success' or 'error'
+                msgEl.classList.remove('hidden');
+            }
+
+            try {
+                const resp = await fetch(`${API_BASE_URL}/bodegas`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (resp.ok) {
+                    showPartnerMessage('¡Solicitud enviada con éxito! Nos pondremos en contacto pronto.', 'success');
+                    partnerForm.reset();
+                } else {
+                    let respBody = null;
+                    try { respBody = await resp.json(); } catch (err) {}
+                    const errorMsg = (respBody && respBody.message) ? respBody.message : 'Error al enviar la solicitud. Intente de nuevo.';
+                    showPartnerMessage(errorMsg, 'error');
+                }
+            } catch (networkErr) {
+                console.error('Error de red al enviar solicitud de bodega:', networkErr);
+                
+                // Fallback for demonstration/offline purposes:
+                let partnerRequests = JSON.parse(localStorage.getItem('entreCopasPartnerRequests') || '[]');
+                partnerRequests.push({
+                    id: Date.now().toString(36),
+                    ...payload,
+                    fechaSolicitud: new Date().toISOString()
+                });
+                localStorage.setItem('entreCopasPartnerRequests', JSON.stringify(partnerRequests));
+
+                showPartnerMessage('¡Solicitud registrada localmente! Nos contactaremos pronto.', 'success');
+                partnerForm.reset();
+            }
+        }
     }
 });

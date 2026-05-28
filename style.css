@@ -108,19 +108,15 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: var(--space-md) var(--gutter);
+  padding: var(--space-sm) var(--gutter);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  transition: background-color 0.3s ease, padding 0.3s ease;
-}
-
-header.scrolled {
   background-color: rgba(249, 249, 249, 0.95);
   backdrop-filter: blur(10px);
-  padding: var(--space-sm) var(--gutter);
   border-bottom: 1px solid var(--surface-dim);
+  transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
 .logo {
@@ -201,14 +197,97 @@ header.scrolled {
   font-size: 18px;
 }
 
-.hero-bg {
+.hero-carousel {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: 0;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 8s ease;
+  transform: scale(1.08);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Carousel controls */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: var(--white);
+}
+
+.carousel-control:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-control.prev {
+  left: var(--gutter);
+}
+
+.carousel-control.next {
+  right: var(--gutter);
+}
+
+/* Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.indicator.active {
+  background: var(--white);
+  transform: scale(1.3);
 }
 
 .hero::after {
@@ -218,7 +297,7 @@ header.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85));
   z-index: 1;
 }
 
