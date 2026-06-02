@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCheckout = document.getElementById('btn-checkout');
     const checkoutMsg = document.getElementById('checkout-message');
 
-    // 1. Cargar y Renderizar Carrito
+    // 1. Cargar y Renderizar Carrito (Solo Lectura - Estilo Cine)
     function renderCart() {
         const cart = JSON.parse(localStorage.getItem('entreCopasCart') || '[]');
 
@@ -33,54 +33,47 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemTotal = item.precio * item.cantidad;
             subtotal += itemTotal;
 
+            // Formatear la fecha elegida
+            let dateStr = item.fecha;
+            try {
+                const dateObj = new Date(item.fecha + 'T00:00:00'); // Evitar desfase de zona horaria
+                if (!isNaN(dateObj.getTime())) {
+                    dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                }
+            } catch (err) {}
+
             const cardHTML = `
-                <div class="reservation-card" style="align-items: stretch; flex-wrap: wrap; gap: var(--space-sm); padding: var(--space-md); margin-bottom: var(--space-sm);">
-                    <!-- Detalles del Item -->
+                <div class="reservation-card" style="align-items: center; flex-wrap: wrap; gap: var(--space-md); padding: var(--space-md); margin-bottom: var(--space-sm);">
+                    <!-- Detalles de la Experiencia (Lado Izquierdo) -->
                     <div style="flex: 1.5; min-width: 250px;">
                         <span class="label-caps" style="color: var(--primary); font-size: 11px;">${item.bodega}</span>
                         <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 600; margin-top: 4px; margin-bottom: 8px;">${item.titulo}</h3>
                         <p style="font-size: 14px; color: var(--on-surface-variant);">
-                            Región: ${item.regionName} | Precio unitario: $${item.precio.toLocaleString('es-AR')}
-                        </p>
-                        <p style="font-size: 16px; font-weight: 700; margin-top: 8px; color: var(--black);">
-                            Subtotal: $${itemTotal.toLocaleString('es-AR')}
+                            Región: ${item.regionName} | Precio por entrada: $${item.precio.toLocaleString('es-AR')}
                         </p>
                     </div>
 
-                    <!-- Inputs de Configuración del checkout -->
-                    <div style="flex: 1.2; display: flex; flex-direction: column; gap: 10px; min-width: 220px; justify-content: space-between; border-left: 1px solid var(--surface-dim); padding-left: var(--space-sm);">
-                        
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                            <label style="margin-bottom: 0; font-size: 11px;">Invitados:</label>
-                            <input type="number" class="form-control item-quantity" 
-                                   data-id="${item.id}" 
-                                   value="${item.cantidad}" 
-                                   min="1" max="30" 
-                                   style="width: 70px; padding: 6px; font-size: 14px; text-align: center; height: auto;">
+                    <!-- Detalles del Ticket Fijo (Centro - Solo Lectura) -->
+                    <div style="flex: 1.2; display: flex; flex-direction: column; gap: 6px; min-width: 200px; padding-left: var(--space-md); border-left: 1px solid var(--surface-dim);">
+                        <div style="font-size: 14px;">
+                            <strong>Fecha:</strong> ${dateStr}
                         </div>
+                        <div style="font-size: 14px;">
+                            <strong>Horario:</strong> ${item.hora} hs
+                        </div>
+                        <div style="font-size: 14px;">
+                            <strong>Entradas:</strong> ${item.cantidad} ${item.cantidad === 1 ? 'persona' : 'personas'}
+                        </div>
+                        <div style="font-size: 16px; font-weight: 700; color: var(--primary); margin-top: 4px;">
+                            Total: $${itemTotal.toLocaleString('es-AR')}
+                        </div>
+                    </div>
 
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                            <label style="margin-bottom: 0; font-size: 11px;">Fecha:</label>
-                            <input type="date" class="form-control item-date" 
-                                   data-id="${item.id}" 
-                                   value="${item.fecha}" 
-                                   style="width: 140px; padding: 6px; font-size: 13px; height: auto;">
-                        </div>
-
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                            <label style="margin-bottom: 0; font-size: 11px;">Horario:</label>
-                            <select class="form-control item-hour" 
-                                    data-id="${item.id}" 
-                                    style="width: 140px; padding: 6px; font-size: 13px; height: auto;">
-                                ${item.horarios.map(h => `<option value="${h}" ${h === item.hora ? 'selected' : ''}>${h} AM/PM</option>`).join('')}
-                            </select>
-                        </div>
-
-                        <div style="text-align: right; margin-top: 8px;">
-                            <button class="btn btn-ghost btn-remove-item" 
-                                    data-id="${item.id}" 
-                                    style="padding: 4px 10px; font-size: 10px; border-color: #c5221f; color: #c5221f;">Eliminar</button>
-                        </div>
+                    <!-- Botón Eliminar (Lado Derecho) -->
+                    <div style="display: flex; align-items: center; justify-content: flex-end; min-width: 100px; flex-grow: 1;">
+                        <button class="btn btn-ghost btn-remove-item" 
+                                data-id="${item.id}" 
+                                style="padding: 6px 12px; font-size: 10px; border-color: #c5221f; color: #c5221f;">Eliminar</button>
                     </div>
                 </div>
             `;
@@ -93,41 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
     }
 
-    // 2. Vincular Escuchas a los Inputs
+    // 2. Vincular Botones de Eliminar
     function setupEventListeners() {
-        // Inputs de Cantidad
-        document.querySelectorAll('.item-quantity').forEach(input => {
-            input.addEventListener('change', (e) => {
-                const id = e.target.getAttribute('data-id');
-                const val = parseInt(e.target.value, 10);
-                if (isNaN(val) || val < 1) {
-                    e.target.value = 1;
-                    actualizarCantidad(id, 1);
-                } else {
-                    actualizarCantidad(id, val);
-                }
-            });
-        });
-
-        // Inputs de Fecha
-        document.querySelectorAll('.item-date').forEach(input => {
-            input.addEventListener('change', (e) => {
-                const id = e.target.getAttribute('data-id');
-                const val = e.target.value;
-                actualizarFecha(id, val);
-            });
-        });
-
-        // Select de Horarios
-        document.querySelectorAll('.item-hour').forEach(select => {
-            select.addEventListener('change', (e) => {
-                const id = e.target.getAttribute('data-id');
-                const val = e.target.value;
-                actualizarHora(id, val);
-            });
-        });
-
-        // Botones de Eliminar
         document.querySelectorAll('.btn-remove-item').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
@@ -136,48 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Funciones Auxiliares de Actualización
-    function actualizarCantidad(id, cant) {
-        let cart = JSON.parse(localStorage.getItem('entreCopasCart') || '[]');
-        const idx = cart.findIndex(item => item.id === id);
-        if (idx !== -1) {
-            cart[idx].cantidad = cant;
-            localStorage.setItem('entreCopasCart', JSON.stringify(cart));
-            renderCart();
-            window.dispatchEvent(new CustomEvent('cartUpdated')); // UX optimista
-        }
-    }
-
-    function actualizarFecha(id, fecha) {
-        let cart = JSON.parse(localStorage.getItem('entreCopasCart') || '[]');
-        const idx = cart.findIndex(item => item.id === id);
-        if (idx !== -1) {
-            cart[idx].fecha = fecha;
-            localStorage.setItem('entreCopasCart', JSON.stringify(cart));
-        }
-    }
-
-    // Establecer límites de fecha min (hoy) para inputs de fecha del carrito
-    const todayStr = new Date().toISOString().split('T')[0];
-    document.querySelectorAll('.item-date').forEach(input => {
-        input.setAttribute('min', todayStr);
-    });
-
-    function actualizarHora(id, hora) {
-        let cart = JSON.parse(localStorage.getItem('entreCopasCart') || '[]');
-        const idx = cart.findIndex(item => item.id === id);
-        if (idx !== -1) {
-            cart[idx].hora = hora;
-            localStorage.setItem('entreCopasCart', JSON.stringify(cart));
-        }
-    }
-
     function eliminarItem(id) {
         let cart = JSON.parse(localStorage.getItem('entreCopasCart') || '[]');
         cart = cart.filter(item => item.id !== id);
         localStorage.setItem('entreCopasCart', JSON.stringify(cart));
         renderCart();
-        window.dispatchEvent(new CustomEvent('cartUpdated'));
+        window.dispatchEvent(new CustomEvent('cartUpdated')); // Notificar cambio
     }
 
     // 3. Procesar Compra / Checkout
@@ -214,12 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // UX feedback
             if (checkoutMsg) {
-                checkoutMsg.textContent = '¡Compra finalizada con éxito! Sus reservas están confirmadas. Redirigiendo...';
+                checkoutMsg.textContent = '¡Compra finalizada con éxito! Sus tickets han sido generados. Redirigiendo...';
                 checkoutMsg.className = 'form-message success';
                 checkoutMsg.classList.remove('hidden');
             }
 
-            // Actualizar Navbar en tiempo real
+            // Actualizar Navbar
             window.dispatchEvent(new CustomEvent('cartUpdated'));
 
             // Redirigir al panel del cliente tras 2 segundos
