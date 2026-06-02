@@ -824,3 +824,115 @@ label {
   background-color: var(--black) !important;
   color: var(--white) !important;
 }
+
+/* ==========================================================================
+   Responsive Mobile Navigation & Role Switch Styles (B2B Module)
+   ========================================================================== */
+
+/* Hamburger Toggle Button */
+.hamburger-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 110;
+}
+
+.hamburger-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--black);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger-toggle.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+.hamburger-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-toggle.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+/* Nav Divider */
+.nav-divider-desktop {
+  width: 1px;
+  height: 20px;
+  background-color: var(--surface-dim);
+  margin: 0 8px;
+}
+
+.nav-divider-mobile {
+  display: none;
+  width: 100%;
+  height: 1px;
+  background-color: var(--surface-dim);
+  margin: 8px 0;
+}
+
+/* Role Switch Button styling */
+.role-switch-btn {
+  font-size: 11px !important;
+  padding: 8px 16px !important;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .hamburger-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--white);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px var(--space-md) var(--space-md);
+    transition: right 0.3s ease-in-out;
+    z-index: 105;
+    gap: 16px;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--surface-dim);
+    display: block;
+  }
+
+  .nav-links .nav-icon-link {
+    border-bottom: none;
+    padding-top: 8px;
+    justify-content: flex-start;
+  }
+
+  .nav-divider-mobile {
+    display: block;
+  }
+
+  .nav-divider-desktop {
+    display: none;
+  }
+
+  .role-switch-btn {
+    width: 100% !important;
+    text-align: center;
+    margin-top: 8px;
+  }
+}

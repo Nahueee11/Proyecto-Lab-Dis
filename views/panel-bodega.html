@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Bodega - Entre Copas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/logo2.0.png" alt="Logo" class="brand-logo">
+                Entre Copas
+            </a>
+        </div>
+        <nav class="nav-links">
+            <!-- JS will populate these dynamically -->
+            <a href="../index.html">Inicio</a>
+            <a href="panel-bodega.html">Dashboard Bodega</a>
+            <a href="crear-experiencia.html">Crear Experiencia</a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container">
+            <div class="dashboard-header">
+                <div class="user-profile">
+                    <div class="avatar" id="winery-avatar" style="background-color: var(--primary-container);">BA</div>
+                    <div class="user-info">
+                        <h2 id="winery-name">Cargando Bodega...</h2>
+                        <p>Socio Productor Premium</p>
+                    </div>
+                </div>
+                <a href="crear-experiencia.html" class="btn btn-primary">Crear Experiencia</a>
+            </div>
+
+            <!-- KPIs Row styled with the design system tokens -->
+            <div class="kpis-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-lg);">
+                <div class="winery-card" style="padding: var(--space-md); text-align: center; cursor: default;">
+                    <span class="label-caps" style="color: var(--on-surface-variant); font-size: 11px;">Reservas Recibidas</span>
+                    <h3 id="kpi-total-reservas" style="font-size: 36px; color: var(--primary); margin-top: 8px;">0</h3>
+                </div>
+                <div class="winery-card" style="padding: var(--space-md); text-align: center; cursor: default;">
+                    <span class="label-caps" style="color: var(--on-surface-variant); font-size: 11px;">Invitados Totales</span>
+                    <h3 id="kpi-total-invitados" style="font-size: 36px; color: var(--primary); margin-top: 8px;">0</h3>
+                </div>
+                <div class="winery-card" style="padding: var(--space-md); text-align: center; cursor: default;">
+                    <span class="label-caps" style="color: var(--on-surface-variant); font-size: 11px;">Reservas Pendientes</span>
+                    <h3 id="kpi-pendientes" style="font-size: 36px; color: var(--outline); margin-top: 8px;">0</h3>
+                </div>
+                <div class="winery-card" style="padding: var(--space-md); text-align: center; cursor: default;">
+                    <span class="label-caps" style="color: var(--on-surface-variant); font-size: 11px;">Reservas Aceptadas</span>
+                    <h3 id="kpi-aceptadas" style="font-size: 36px; color: #137333; margin-top: 8px;">0</h3>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-sidebar">
+                    <nav class="dashboard-nav">
+                        <a href="#" class="active">Reservas Recibidas</a>
+                        <a href="#">Calendario de Catas</a>
+                        <a href="#">Mis Experiencias</a>
+                        <a href="#">Perfil de Finca</a>
+                    </nav>
+                </div>
+
+                <div class="dashboard-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-md);">
+                        <h3 style="margin-bottom: 0;">Solicitudes de Reserva</h3>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label for="filter-date" style="margin-bottom: 0; font-size: 11px; white-space: nowrap;">Filtrar por Fecha:</label>
+                            <input type="date" id="filter-date" class="form-control" style="width: 160px; padding: 8px; font-size: 14px; height: auto;">
+                        </div>
+                    </div>
+                    <div id="winery-reservations-list" class="reservations-container">
+                        <!-- Dynamic content from LocalStorage will be rendered here -->
+                        <div class="empty-state">
+                            <p>No se han recibido solicitudes de reserva para su bodega.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="trabaja-con-nosotros.html">Trabaja con Nosotros</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2026 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/pages/panel-bodega.js"></script>
+</body>
+</html>

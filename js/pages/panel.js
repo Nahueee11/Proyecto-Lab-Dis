@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dateObj = new Date(res.fecha);
                 const dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
+                // Determinar colores del badge de estado
+                let badgeBg = '#f2f2f2';
+                let badgeColor = '#555555';
+                if (res.status === 'Pendiente') {
+                    badgeBg = '#fef7e0';
+                    badgeColor = '#b06000';
+                } else if (res.status === 'Aceptada' || res.status === 'Confirmada') {
+                    badgeBg = '#e6f4ea';
+                    badgeColor = '#137333';
+                } else if (res.status === 'Rechazada') {
+                    badgeBg = '#fce8e6';
+                    badgeColor = '#c5221f';
+                }
+
                 const cardHTML = `
                     <div class="reservation-card">
                         <div class="res-details">
@@ -23,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span>${dateStr} a las ${res.hora}</span> | <span>${res.invitados} Invitado(s)</span>
                             </div>
                         </div>
-                        <div class="res-status">${res.status}</div>
+                        <div class="res-status" style="background-color: ${badgeBg}; color: ${badgeColor}; border-radius: 4px;">
+                            ${res.status}
+                        </div>
                     </div>
                 `;
                 reservationsList.insertAdjacentHTML('beforeend', cardHTML);

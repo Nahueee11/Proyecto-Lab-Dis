@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Entre Copas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/logo2.0.png" alt="Logo" class="brand-logo">
+                Entre Copas
+            </a>
+        </div>
+        <nav class="nav-links">
+            <!-- JS will dynamically populate links -->
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg); border-bottom: 1px solid var(--black); padding-bottom: var(--space-sm);">
+                <h1>Su Selección de Experiencias</h1>
+                <p style="color: var(--on-surface-variant); margin-top: 4px;">Revise los detalles, seleccione las fechas de visita e invitados antes de finalizar su reserva.</p>
+            </div>
+
+            <div class="reservation-layout">
+                <!-- Resumen Sidebar (Left column, 1fr) -->
+                <aside class="cart-summary" style="display: flex; flex-direction: column; gap: var(--space-md);">
+                    <div class="form-wrapper" style="padding: var(--space-md); cursor: default;">
+                        <h3 style="margin-bottom: var(--space-sm); border-bottom: 1px solid var(--surface-dim); padding-bottom: 8px;">Resumen</h3>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px;">
+                            <span>Subtotal experiencias:</span>
+                            <span id="summary-subtotal">$0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-md); font-weight: 700; font-size: 18px; color: var(--primary);">
+                            <span>Total estimado:</span>
+                            <span id="summary-total">$0</span>
+                        </div>
+
+                        <button id="btn-checkout" class="btn btn-primary btn-block">Finalizar Compra</button>
+                        
+                        <div id="checkout-message" class="form-message hidden" style="margin-top: var(--space-sm);">
+                            <!-- Dynamic success/error message -->
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- List of Items (Right column, 1.5fr) -->
+                <div id="cart-content-area">
+                    <div id="cart-items-list">
+                        <!-- Dynamic items will be injected here -->
+                        <div class="empty-state">
+                            <p>Su carrito está actualmente vacío.</p>
+                            <a href="explorar.html" class="btn btn-ghost mt-sm">Explorar Bodegas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="trabaja-con-nosotros.html">Trabaja con Nosotros</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2026 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/pages/carrito.js"></script>
+</body>
+</html>
