@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Bodega - Entre Copas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header id="main-header" class="scrolled">
+        <div class="logo">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/logo2.0.png" alt="Logo" class="brand-logo">
+                Entre Copas
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="explorar.html">Explorar</a>
+            <a href="panel.html">Panel</a>
+            <a href="reservas.html">Reservas</a>
+            <a href="trabaja-con-nosotros.html">Asociarse</a>
+            <a href="registro.html" class="nav-icon-link" aria-label="Registrarse">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </a>
+        </nav>
+    </header>
+
+    <main class="page-content pt-header">
+        <section class="section container" style="display: flex; justify-content: center;">
+            <div class="reservation-form-container" style="max-width: 500px; width: 100%;">
+                <div style="text-align: center; margin-bottom: var(--space-lg);">
+                    <h1>Registro de Bodega</h1>
+                    <p style="margin-top: var(--space-sm); color: var(--on-surface-variant);">Asocie su bodega a nuestra red exclusiva B2B para gestionar sus visitas y catas.</p>
+                </div>
+                <form id="registro-bodega-form" class="form-wrapper">
+                    <div class="form-group">
+                        <label for="nombre-oficial">Nombre Oficial</label>
+                        <input type="text" id="nombre-oficial" name="nombreOficial" required class="form-control" placeholder="Nombre oficial de la bodega">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="region">Región Vitivinícola</label>
+                        <select id="region" name="region" required class="form-control">
+                            <option value="" disabled selected>Seleccione una región...</option>
+                            <option value="Valle de Uco">Valle de Uco</option>
+                            <option value="Luján de Cuyo">Luján de Cuyo</option>
+                            <option value="Maipú">Maipú</option>
+                            <option value="Salta">Salta</option>
+                            <option value="Patagonia">Patagonia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="municipio">Municipio / Distrito</label>
+                        <input type="text" id="municipio" name="municipio" required class="form-control" placeholder="Ej. Vista Flores, Tupungato">
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: block; margin-bottom: 8px;">Experiencias Ofrecidas</label>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="experiencias" value="cata" style="width: 18px; height: 18px;"> Cata Privada
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="experiencias" value="visita" style="width: 18px; height: 18px;"> Visita Guiada
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; cursor: pointer;">
+                                <input type="checkbox" name="experiencias" value="degustacion" style="width: 18px; height: 18px;"> Degustación Gourmet
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-md">Registrar Bodega</button>
+                    
+                    <div style="text-align: center; margin-top: var(--space-md); font-size: 14px;">
+                        ¿Ya tiene una cuenta de socio? <a href="login.html" style="font-weight: 700; color: var(--primary); text-decoration: underline;">Iniciar Sesión</a>
+                    </div>
+                    
+                    <div id="registro-bodega-message" class="form-message hidden">
+                        <!-- JS will inject success message here -->
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">ENTRE COPAS</div>
+            <div class="footer-links">
+                <a href="#">Herencia</a>
+                <a href="trabaja-con-nosotros.html">Trabaja con Nosotros</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Conserje</a>
+            </div>
+            <div class="copyright">
+                © 2024 ENTRE COPAS. Viticultura y Ceremonia.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/pages/registro-bodega.js"></script>
+</body>
+</html>
